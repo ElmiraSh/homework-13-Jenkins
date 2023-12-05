@@ -8,6 +8,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.util.Map;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -25,7 +28,14 @@ public class TextBoxTests {
         // Configuration.holdBrowserOpen = true;
         SelenideLogger.addListener("AllureSelenide",new AllureSelenide());
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        Configuration.browserCapabilities = capabilities;
     }
+
     @AfterEach
     void addAttachments() {
         Attach.screenshotAs("Last screenshot");
