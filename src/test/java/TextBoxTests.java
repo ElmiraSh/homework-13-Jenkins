@@ -1,4 +1,5 @@
 //package src.test;
+
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import helpers.Attach;
@@ -46,12 +47,12 @@ public class TextBoxTests {
 
     @Test
     void fillFormTest() {
-        step("Open form",() -> {
+        step("Open form", (Runnable) () -> {
                     open("/automation-practice-form");
                     executeJavaScript("$('#fixedban').remove()");
                     executeJavaScript("$('footer').remove()");
                 });
-        step("Fill form",() -> {
+        step("Fill form", (Runnable) () -> {
                     $("#firstName").setValue("Elmira");
                     $("#lastName").setValue("Shaykhattarova");
                     $("#userEmail").setValue("elmirailgizovna@gmail.com");
@@ -81,7 +82,7 @@ public class TextBoxTests {
                     $("#submit").click();
                 });
 
-        step("Verify results",() -> {
+        step("Verify results", (Runnable) () -> {
             $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
             $(".table-responsive").shouldHave((text("Elmira")),
                     text("Shaykhattarova"),
