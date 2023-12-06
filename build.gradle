@@ -28,15 +28,16 @@ allure {
 
 dependencies {
     testImplementation (
-            'com.codeborne:selenide:6.16.0',
-            "io.qameta.allure:allure-selenide:$allureVersion",
-            'com.github.javafaker:javafaker:1.0.2',
+            'com.codeborne:selenide:6.19.0',
             'org.junit.jupiter:junit-jupiter:5.9.3',
+            'com.github.javafaker:javafaker:1.0.2',
+            'io.qameta.allure:allure-selenide:2.24.0',
             'org.slf4j:slf4j-simple:2.0.7'
     )
 }
 
 tasks.withType(Test) {
+    systemProperties(System.getProperties())
     useJUnitPlatform()
 
     testLogging {
@@ -47,14 +48,13 @@ tasks.withType(Test) {
     }
 }
 
-task simple_test(type: Test) {
-    useJUnitPlatform {
-        includeTags("simple")
-    }
-}
 
-task demoqa_test(type: Test) {
-    useJUnitPlatform {
-        includeTags("demoqa")
+    task demoqa(type: Test) {
+        useJUnitPlatform{
+            includeTags("demoqa")
+        }
     }
-}
+
+
+
+
